@@ -12,6 +12,17 @@ services:
       MYSQL_DATABASE: wpdb
       MYSQL_USER: wordpress000kun
       MYSQL_PASSWORD: wkunpass
+
+  apache000:
+    image: httpd
+    volumes:
+      - apache000vol1:/usr/local/apache2/htdocs/
+    ports:
+      - "11008:80"
+    restart: always
+    depends_on:
+      - mysql000
+      
   wordpress000:
     depends_on:
       - mysql000
@@ -21,7 +32,7 @@ services:
     volumes:
       - wordpress000vol1:/var/www/html
     ports:
-      - 11008:80
+      - "11008:80"
     restart: always
     environment:
       WORDPRESS_DB_HOST: mysql000
