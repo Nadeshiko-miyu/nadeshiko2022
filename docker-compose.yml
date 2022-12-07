@@ -1,11 +1,11 @@
 version: '3'
-services:
-  web:
-    image: httpd
-    volumes:
-     - .:/usr/local/apache2/htdocs/
-    ports:
-      - "80:80"
+ #services:
+  #web:
+   # image: httpd
+    #volumes:
+     #- .:/usr/local/apache2/htdocs/
+    #ports:
+     # - "80:80"
 
   db:
     image: mysql:5.7
