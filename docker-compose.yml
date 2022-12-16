@@ -12,18 +12,22 @@ services:
       MYSQL_DATABASE: wpdb
       MYSQL_USER: wordpress000kun
       MYSQL_PASSWORD: wkunpass
-  #phpmyadmin:
-   # image: phpmyadmin/phpmyadmin
-    #ports:
-     # - '8080:80'
-    #restart: always
-    #depends_on:
-     # - db
-    #environment:
-     # PMA_HOST: db
-      #MYSQL_ROOT_PASSWORD: password
-    #networks:
-     # - net001
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8080:80'
+    restart: always
+    depends_on:
+      - db
+  php-apache:
+    image: php:7.3-apache
+    ports:
+      - 80:80
+    volimes:
+      - ./htdocs:/var/www/html
+    restart: always
+    depends_on:
+      - db
   wordpress:
     depends_on:
       - db
@@ -32,19 +36,13 @@ services:
       - net001
     volumes: ['./:/var/www/html']
     ports:
-      - '11008:80'
+      - '8080:80'
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wpdb
       WORDPRESS_DB_USER: wordpress000kun
       WORDPRESS_DB_PASSWORD: wkunpass
-  web:
-    image: httpd
-    volumes:
-      - .:/usr/local/apache2/htdocs/
-    #ports:
-     # - "80:80"
 networks:
   net001:
 volumes:
