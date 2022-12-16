@@ -23,7 +23,7 @@ services:
     image: php:7.3-apache
     ports:
       - 80:80
-    volimes:
+    volumes:
       - ./htdocs:/var/www/html
     restart: always
     depends_on:
@@ -34,7 +34,8 @@ services:
     image: wordpress
     networks:
       - net001
-    volumes: ['./:/var/www/html']
+    volumes: 
+      - wp:/var/www/html
     ports:
       - '8080:80'
     restart: always
