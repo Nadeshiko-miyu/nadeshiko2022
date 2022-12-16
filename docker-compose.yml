@@ -48,3 +48,4 @@ networks:
   net001:
 volumes:
   db_data:
+  wp:
